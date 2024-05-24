@@ -45,13 +45,10 @@ def factors(filename):
         None
     """
     with open(filename, encoding="utf-8") as file:
-        for line in file:
-            num = int(line.strip())
+        for line in file.readlines():
+            num = int(line)
             factorize(num)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: factors.py <filename>")
-        sys.exit(1)
     factors(sys.argv[1])
