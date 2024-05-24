@@ -48,7 +48,7 @@ def factors(filename):
     with open(filename, encoding="utf-8") as file:
         for line in file.readlines():
             num = int(line)
-            factorize(num)
+            result = factorize(num)
 
 
 if __name__ == "__main__":
