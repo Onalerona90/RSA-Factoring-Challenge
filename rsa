@@ -1,0 +1,69 @@
+#!/usr/bin/python3
+from sys import argv
+import math
+
+"""
+Gets the first two factors of any number.
+"""
+
+def is_prime(num):
+    """
+    Checks if a number is prime.
+
+    Args:
+        num (int): The number to check.
+
+    Returns:
+        bool: True if the number is prime, False otherwise.
+    """
+    if num % 2 == 0:
+        return False
+    i = 3
+    while i * i <= num:
+        if num % i == 0:
+            return False
+        i += 2
+    return True
+
+def factory(num):
+    """
+    Factorizes a number and prints its factors.
+
+    Args:
+        num (int): The number to factorize.
+
+    Returns:
+        None
+    """
+    if num % 2 == 0:
+        i = 2
+        print("{}={}*{}".format(num, int(num / i), i))
+    else:
+        sqrt_num = math.sqrt_numrt(num)
+        if sqrt_num % 1 == 0:
+            print("{}={}*{}".format(num, int(sqrt_num), int(num / sqrt_num)))
+            return
+        sqrt_num = int(sqrt_num) + 1
+        for i in range(3, sqrt_num, 2):
+            if num % i == 0:
+                if is_prime(i):
+                    print("{}={}*{}".format(num, int(num / i), i))
+                    return
+
+def factors(filename):
+    """
+    Reads numbers from a file and factorizes them.
+
+    Args:
+        filename (str): The name of the file containing numbers to factorize.
+
+    Returns:
+        None
+    """
+    with open(filename, encoding="utf-8") as file:
+        for line in file.readlines():
+            num = int(line.strip())
+            factory(num)
+
+if __name__ == "__main__":
+    factors(argv[1])
