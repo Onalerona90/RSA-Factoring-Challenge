@@ -25,7 +25,7 @@ def is_prime(num):
         i += 2
     return True
 
-def factory(num):
+def factorize(num):
     """
     Factorizes a number and prints its factors.
 
@@ -39,7 +39,7 @@ def factory(num):
         i = 2
         print("{}={}*{}".format(num, int(num / i), i))
     else:
-        sqrt_num = math.sqrt_numrt(num)
+        sqrt_num = math.sqrt(num)
         if sqrt_num % 1 == 0:
             print("{}={}*{}".format(num, int(sqrt_num), int(num / sqrt_num)))
             return
@@ -63,7 +63,7 @@ def factors(filename):
     with open(filename, encoding="utf-8") as file:
         for line in file.readlines():
             num = int(line)
-            factory(num)
+            factorize(num)
 
 if __name__ == "__main__":
     factors(sys.argv[1])
