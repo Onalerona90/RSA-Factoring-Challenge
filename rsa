@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from sys import argv
+import sys
 import math
 
 """
@@ -62,8 +62,8 @@ def factors(filename):
     """
     with open(filename, encoding="utf-8") as file:
         for line in file.readlines():
-            num = int(line.strip())
+            num = int(line)
             factory(num)
 
 if __name__ == "__main__":
-    factors(argv[1])
+    factors(sys.argv[1])
