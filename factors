@@ -1,40 +1,55 @@
 #!/usr/bin/python3
 import sys
+import math
+"""
+Factorize as many numbers as possible into a product of two smaller numbers.
+"""
 
 
-def factorize(n):
+def factorize(num):
     """
-    Factorizes a given number into its prime factors.
+    Factorize a given number into two smaller numbers.
 
     Args:
-        n (int): The number to factorize.
+        num (int): The number to factorize.
 
     Returns:
-        list: A list of prime factors of the given number.
+        None
     """
-    factors = []
-    for i in range(2, int(n ** 0.5) + 1):
-        while n % i == 0:
-            factors.append(i)
-            n //= i
-    if n > 1:
-        factors.append(n)
-    return factors
+    if num % 2 == 0:
+        i = 2
+        print("{}={}*{}".format(num, int(num // i), i))
+    else:
+        sqrt_num = int(math.sqrt(num)) + 1
+        for i in range(3, sqrt_num, 2):
+            if num % i == 0:
+                print("{}={}*{}".format(num, int(num // i), i))
+                return
+            if num % (sqrt_num + i) == 0:
+                print("{}={}*{}".format(
+                    num, sqrt_num + i, int(num // (sqrt_num + i))))
+                return
+            if num % (sqrt_num - i) == 0:
+                print("{}={}*{}".format(
+                    num, sqrt_num - i, int(num // (sqrt_num - i))))
+                return
 
 
-def main(filename):
+def factors(filename):
     """
-    Reads numbers from a file, factorizes them, and prints the factorization.
+    Read numbers from a file and factorize each of them.
 
     Args:
-        filename (str): The name of the file containing numbers to factorize.
+        filename (str): The name of the file containing the numbers.
+
+    Returns:
+        None
     """
-    with open(filename, 'r') as file:
-        for line in file:
-            num = int(line.strip())
-            factors = factorize(num)
-            print(f"{num}={'*'.join(map(str, factors))}")
+    with open(filename, encoding="utf-8") as file:
+        for line in file.readlines():
+            num = int(line)
+            factorize(num)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    factors(sys.argv[1])
