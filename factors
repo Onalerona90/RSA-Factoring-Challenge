@@ -18,20 +18,20 @@ def factorize(num):
     """
     if num % 2 == 0:
         i = 2
-        print("{}={}*{}".format(num, int(num // i), i))
+        print("{}={}*{}".format(num, int(num//i), i))
     else:
         sqrt_num = int(math.sqrt(num)) + 1
         for i in range(3, sqrt_num, 2):
             if num % i == 0:
-                print("{}={}*{}".format(num, int(num // i), i))
+                print("{}={}*{}".format(num, int(num//i), i))
                 return
             if num % (sqrt_num + i) == 0:
                 print("{}={}*{}".format(
-                    num, sqrt_num + i, int(num // (sqrt_num + i))))
+                    num, sqrt_num + i, int(num//(sqrt_num + i))))
                 return
             if num % (sqrt_num - i) == 0:
                 print("{}={}*{}".format(
-                    num, sqrt_num - i, int(num // (sqrt_num - i))))
+                    num, sqrt_num - i, int(num//(sqrt_num - i))))
                 return
 
 
@@ -48,7 +48,7 @@ def factors(filename):
     with open(filename, encoding="utf-8") as file:
         for line in file.readlines():
             num = int(line)
-            result = factorize(num)
+            factorize(num)
 
 
 if __name__ == "__main__":
