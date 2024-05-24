@@ -1,55 +1,43 @@
 #!/usr/bin/python3
 import sys
-import math
-"""
-Factorize as many numbers as possible into a product of two smaller numbers.
-"""
 
 
-def factorize(num):
+def factorize(n):
     """
-    Factorize a given number into two smaller numbers.
+    Factorizes a given number into its prime factors.
 
     Args:
-        num (int): The number to factorize.
+        n (int): The number to factorize.
 
     Returns:
-        None
+        list: A list of prime factors of the given number.
     """
-    if num % 2 == 0:
-        i = 2
-        print("{}={}*{}".format(num, int(num//i), i))
-    else:
-        sqrt_num = int(math.sqrt(num)) + 1
-        for i in range(3, sqrt_num, 2):
-            if num % i == 0:
-                print("{}={}*{}".format(num, int(num//i), i))
-                return
-            if num % (sqrt_num + i) == 0:
-                print("{}={}*{}".format(
-                    num, sqrt_num + i, int(num//(sqrt_num + i))))
-                return
-            if num % (sqrt_num - i) == 0:
-                print("{}={}*{}".format(
-                    num, sqrt_num - i, int(num//(sqrt_num - i))))
-                return
+    factors = []
+    for i in range(2, int(n ** 0.5) + 1):
+        while n % i == 0:
+            factors.append(i)
+            n //= i
+    if n > 1:
+        factors.append(n)
+    return factors
 
 
-def factors(filename):
+def main(filename):
     """
-    Read numbers from a file and factorize each of them.
+    Reads numbers from a file, factorizes them, and prints the factorization.
 
     Args:
-        filename (str): The name of the file containing the numbers.
-
-    Returns:
-        None
+        filename (str): The name of the file containing numbers to factorize.
     """
-    with open(filename, encoding="utf-8") as file:
-        for line in file.readlines():
-            num = int(line)
-            factorize(num)
+    with open(filename, 'r') as file:
+        for line in file:
+            num = int(line.strip())
+            factors = factorize(num)
+            print(f"{num}={'*'.join(map(str, factors))}")
 
 
 if __name__ == "__main__":
-    factors(sys.argv[1])
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        sys.exit(1)
+    main(sys.argv[1])
